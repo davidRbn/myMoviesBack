@@ -7,12 +7,6 @@ const apiRouter = require('./apiRouter').router
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-app.connect({
-    host: process.env.DB_HOST,
-   username: process.env.DB_USER,
-    password: process.env.DB_PASS
-})
-
 
 app.get('/',(req,res) =>{
     res.setHeader('Content-Type','text/html')
