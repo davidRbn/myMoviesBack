@@ -33,7 +33,14 @@ connection.end();
 
 ///////////////////////////////
 
-app.listen(8080,() => {
-    console.log('Server en ecoute')
-})
+// app.listen(8080,() => {
+//     console.log('Server en ecoute')
+// })
+
+models
+    .sequelize
+    .sync()
+    .then(app.listen(process.env.PORT || 3000, () => {
+        console.log('Server is running')
+    }))
 
