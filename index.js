@@ -2,7 +2,13 @@ const express = require('express');
 const app = express()
 const apiRouter = require('./apiRouter').router
 const mysql = require('mysql');
-const connection = mysql.createConnection(process.env.JAWSDB_URL);
+const models = require('./models')
+// let port = process.env.PORT
+
+
+//  if (port === null || port === "" || port === undefined) {
+//      port = 8000;
+//    }
 
 
 app.use(express.urlencoded({extended: true}))
@@ -19,15 +25,7 @@ app.use('/api/',apiRouter)
 ////////////////////////////////
 
 
-connection.connect();
 
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
-  if (err) throw err;
-
-  console.log('The solution is: ', rows[0].solution);
-});
-
-connection.end();
 
 
 
@@ -40,7 +38,21 @@ connection.end();
 models
     .sequelize
     .sync()
-    .then(app.listen(process.env.PORT || 8080, () => {
+    .then(app.listen(process.env.PORT || 3000, () => {
         console.log('Server is running')
     }))
+
+    const connection = mysql.createConnection(process.env.JAWSDB_URL);
+
+
+connection.connect();
+
+connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+  if (err) throw err;
+
+  console.log('The solution is: ', rows[0].solution);
+});
+
+
+    connection.end();
 
